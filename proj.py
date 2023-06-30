@@ -11,11 +11,13 @@ time.sleep(5)
 # Element Selectors
 dob_input = driver.find_element_by_css_selector("input#dob.form-control") # DOB field
 mob_input = driver.find_element_by_css_selector("input#mobile.form-control") # Mobile field
+name_input = driver.find_element_by_css_selector("input#fname.form-control") # Name field
 
 
 # Regex pattern
 dob_pattern = dob_input.get_attribute("pattern")
 mob_pattern = mob_input.get_attribute("pattern")
+
 
 
 # DOB Test Cases
@@ -67,6 +69,31 @@ else:
     print(f'Test failed! {mobile} is not a valid mobile number.')
 
 time.sleep(2)
+
+# Name field test cases
+name = "John Doe" # Valid name
+name_input.clear()
+name_input.send_keys(name)
+name_input.send_keys(Keys.ENTER)
+name_match = bool(re.match("^[a-zA-Z ]*$", name))
+if name_match:
+    print(f'Test passed! {name} is a valid name.')
+else:
+    print(f'Test failed! {name} is not a valid name.')
+
+time.sleep(2)
+
+name = "John Doe 123" # Invalid name
+name_input.clear()
+name_input.send_keys(name)
+name_input.send_keys(Keys.ENTER)
+name_match = bool(re.match("^[a-zA-Z ]*$", name))
+if name_match:
+    print(f'Test passed! {name} is a valid name.')
+else:
+    print(f'Test failed! {name} is not a valid name.')
+    
+
 
 
 time.sleep(10)
