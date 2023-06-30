@@ -10,26 +10,26 @@ time.sleep(5)
 
 # Element Selectors
 dob_input = driver.find_element_by_css_selector("input#dob.form-control") # DOB field
+mob_input = driver.find_element_by_css_selector("input#mobile.form-control") # Mobile field
 
 
 # Regex pattern
 dob_pattern = dob_input.get_attribute("pattern")
+mob_pattern = mob_input.get_attribute("pattern")
 
-# Test Case 3: Enter a valid date
+
+# DOB Test Cases
 date = "1999-05-30"
 dob_input.clear()
 dob_input.send_keys(date)
 dob_input.send_keys(Keys.ENTER) # Check using ENTER key
-time.sleep(2)
-
 dob_match = bool(re.match(dob_pattern, date))
 if dob_match:
     print(f'Test passed! {date} is a valid date.')
 else:
     print(f'Test failed! {date} is not a valid date.')
 
-
-# Test Case 4: Enter an invalid date
+time.sleep(2)
 date = "1999-13-45"  # Invalid month and day
 dob_input.clear()
 dob_input.send_keys(date)
@@ -40,9 +40,34 @@ if dob_match:
 else:
     print(f'Test failed! {date} is not a valid date.')
 
-# Test Case 5: Submit the form (assuming it exists)
+time.sleep(2)
 
-# Wait for a few seconds to see the result
+# Mobile field test cases
+
+mobile = "1234567890" # 10 digits valid
+mob_input.clear()
+mob_input.send_keys(mobile)
+mob_input.send_keys(Keys.ENTER)
+mob_match = bool(re.match(mob_pattern, mobile))
+if mob_match:
+    print(f'Test passed! {mobile} is a valid mobile number.')
+else:
+    print(f'Test failed! {mobile} is not a valid mobile number.')
+
+time.sleep(2)
+
+mobile = "123456780" #Invalid mobile number digits
+mob_input.clear()
+mob_input.send_keys(mobile)
+mob_input.send_keys(Keys.ENTER)
+mob_match = bool(re.match(mob_pattern, mobile))
+if mob_match:
+    print(f'Test passed! {mobile} is a valid mobile number.')
+else:
+    print(f'Test failed! {mobile} is not a valid mobile number.')
+
+time.sleep(2)
+
 
 time.sleep(10)
 # Quit the browser
